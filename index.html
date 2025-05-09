@@ -3,486 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미래 사회 변화 딥서치 프롬프트 생성기 (2025)</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <title>🚀 미래 사회 변화 탐구 프롬프트 생성기</title>
     <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(32, 33, 36, 0.1);
+        }
+        
         body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            color: #5f6368;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-top: 0;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
         }
         
         .card {
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 15px;
             cursor: pointer;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
         
         .card.selected {
-            border: 3px solid #4f46e5;
-            background-color: #eff6ff;
+            border-color: var(--primary-color);
+            background-color: rgba(66, 133, 244, 0.05);
+            box-shadow: 0 0 0 2px var(--primary-color);
         }
         
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-image {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 0.5rem;
+        .card.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
         }
         
-        @media print {
-            .no-print {
-                display: none;
-            }
-            
-            html, body {
-                width: 100%;
-                height: auto;
-            }
-            
-            .page-break {
-                display: none;
-            }
+        .card h3 {
+            margin-top: 0;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+        
+        .card p {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        .prompt-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .prompt-container {
+            background: #f1f3f4;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+            white-space: pre-wrap;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #3367d6;
+        }
+        
+        .generate-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background 0.3s;
+        }
+        
+        .generate-btn:hover {
+            background: #3367d6;
+        }
+        
+        .alert {
+            background-color: #fdeded;
+            color: var(--accent-color);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #5f6368;
+            font-size: 14px;
+        }
+        
+        .creator-info {
+            margin-top: 10px;
+            font-style: italic;
         }
     </style>
 </head>
-<body class="py-8 px-4 md:px-8">
-    <main class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <!-- Header Section -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-700 mb-2">미래 사회 변화 딥서치 프롬프트 생성기</h1>
-            <p class="text-lg text-gray-600">미래 사회의 변화에 대한 깊이 있는 탐구를 위한 맞춤형 프롬프트 생성 도구</p>
-            <div class="mt-3 inline-block bg-indigo-100 px-3 py-1 rounded-full text-indigo-800 text-sm font-medium">
-                2025년 버전
-            </div>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 미래 사회 변화 탐구 프롬프트 생성기</h1>
+            <p class="description">각 항목에서 카드를 선택하여 딥서치를 활용한 맞춤형 미래 사회 변화 탐구 프롬프트를 생성하세요. 5개 카테고리 모두에서 선택해야 프롬프트가 생성됩니다.</p>
         </header>
-
-        <!-- Instructions -->
-        <div class="mb-8 p-4 bg-gray-50 rounded-lg">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">🗂️ 프롬프트 구성 요소</h2>
-            <p class="text-gray-700 mb-4">각 요소별로 아래 카드 중 하나를 선택하여 조합해 보세요. 카드를 클릭하면 프롬프트가 자동으로 생성됩니다.</p>
-            <ul class="list-disc pl-5 text-gray-700">
-                <li><strong>[미래 시점]</strong>: 어느 시점의 미래를 탐색할까요?</li>
-                <li><strong>[핵심 변화 분야]</strong>: 어떤 분야의 변화에 주목할까요?</li>
-                <li><strong>[탐구 관점]</strong>: 어떤 시각으로 변화를 살펴볼까요?</li>
-                <li><strong>[요청 결과물]</strong>: 어떤 형태의 답변을 원하나요?</li>
-            </ul>
+        
+        <div class="card-section">
+            <h2>🔮 미래 시점</h2>
+            <div class="cards-container" id="future-timeframe">
+                <div class="card" data-value="단기 미래 (5~10년 후)">
+                    <h3>⏱️ 단기 미래 (5~10년 후)</h3>
+                    <p>가까운 미래의 변화에 초점, 현재 흐름의 연장선에서 예측 가능한 변화 탐구</p>
+                </div>
+                <div class="card" data-value="중기 미래 (10~20년 후)">
+                    <h3>📅 중기 미래 (10~20년 후)</h3>
+                    <p>현재 추세가 본격적으로 발현되는 시기, 거시적 흐름과 패턴 분석</p>
+                </div>
+                <div class="card" data-value="장기 미래 (20~50년 후)">
+                    <h3>🗓️ 장기 미래 (20~50년 후)</h3>
+                    <p>현재와 크게 달라진 사회 구조 탐구, 장기적 변화의 파급력 분석</p>
+                </div>
+                <div class="card" data-value="초장기 미래 (50년 이상)">
+                    <h3>🔭 초장기 미래 (50년 이상)</h3>
+                    <p>미래학적 관점에서 가능한 시나리오 탐색, 인류 문명의 장기적 발전 방향</p>
+                </div>
+            </div>
         </div>
-
-        <!-- Card Sections -->
-        <!-- 1. 미래 시점 카드 -->
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">1. [미래 시점] 카드</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1-1 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="future-time" data-value="short-term">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-hourglass-start card-icon text-blue-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">단기 미래 (5~10년 후)</h3>
-                        <p class="text-gray-600 text-sm">다가올 변화의 초기 양상 탐구</p>
-                    </div>
-                </div>
-                
-                <!-- Card 1-2 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="future-time" data-value="mid-term">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-hourglass-half card-icon text-green-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">중기 미래 (2030년대)</h3>
-                        <p class="text-gray-600 text-sm">현재 트렌드가 구체화될 시점 탐구</p>
-                    </div>
-                </div>
-                
-                <!-- Card 1-3 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="future-time" data-value="long-term">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-hourglass-end card-icon text-purple-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">장기 미래 (2050년 이후)</h3>
-                        <p class="text-gray-600 text-sm">패러다임 전환 수준의 변화 탐구</p>
-                    </div>
-                </div>
-                
-                <!-- Card 1-4 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="future-time" data-value="after-event">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-bolt card-icon text-yellow-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">특정 기술/현상 발현 후</h3>
-                        <p class="text-gray-600 text-sm">특정 변곡점 이후의 사회 변화 탐구</p>
-                    </div>
-                </div>
-            </div>
-        </section>
         
-        <!-- 2. 핵심 변화 분야 카드 -->
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">2. [핵심 변화 분야] 카드</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 2-1 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="key-area" data-value="ai">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-robot card-icon text-indigo-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">인공지능(AI) 발전과 확산</h3>
-                        <p class="text-gray-600 text-sm">AI가 가져올 사회, 경제, 윤리적 변화</p>
-                    </div>
+        <div class="card-section">
+            <h2>🔍 핵심 분야</h2>
+            <div class="cards-container" id="core-area">
+                <div class="card" data-value="기술과 디지털 혁신">
+                    <h3>💻 기술과 디지털 혁신</h3>
+                    <p>인공지능, 로봇공학, 빅데이터, 메타버스, 양자컴퓨팅 등 기술 발전과 그 영향</p>
                 </div>
-                
-                <!-- Card 2-2 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="key-area" data-value="climate">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-leaf card-icon text-green-600"></i>
-                        <h3 class="text-lg font-semibold mb-2">기후변화와 지속가능성</h3>
-                        <p class="text-gray-600 text-sm">환경 문제 해결 및 새로운 삶의 방식 모색</p>
-                    </div>
+                <div class="card" data-value="환경과 지속가능성">
+                    <h3>🌍 환경과 지속가능성</h3>
+                    <p>기후변화, 친환경 에너지, 자원 관리, 생태계 보전과 사회적 대응</p>
                 </div>
-                
-                <!-- Card 2-3 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="key-area" data-value="work">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-briefcase card-icon text-red-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">일과 직업의 미래</h3>
-                        <p class="text-gray-600 text-sm">자동화, 긱 이코노미, 평생 학습 등</p>
-                    </div>
+                <div class="card" data-value="사회와 인구 구조">
+                    <h3>👨‍👩‍👧‍👦 사회와 인구 구조</h3>
+                    <p>고령화, 도시화, 가족 구조, 공동체 변화와 사회문화적 변동</p>
                 </div>
-                
-                <!-- Card 2-4 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="key-area" data-value="community">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-users card-icon text-amber-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">인간관계와 공동체의 변화</h3>
-                        <p class="text-gray-600 text-sm">디지털화, 개인주의 심화 속 새로운 연결 방식</p>
-                    </div>
+                <div class="card" data-value="경제와 일자리 변화">
+                    <h3>💼 경제와 일자리 변화</h3>
+                    <p>미래 산업 구조, 노동 시장, 경제 모델, 재정 체계와 소득 분배</p>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- 3. 탐구 관점 카드 -->
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">3. [탐구 관점] 카드</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 3-1 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="perspective" data-value="positive">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-lightbulb card-icon text-yellow-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">긍정적 영향과 새로운 기회</h3>
-                        <p class="text-gray-600 text-sm">기술 발전, 사회 혁신으로 인한 혜택 탐색</p>
-                    </div>
+        <div class="card-section">
+            <h2>🧩 탐구 관점</h2>
+            <div class="cards-container" id="research-perspective">
+                <div class="card" data-value="기회와 발전 가능성">
+                    <h3>✨ 기회와 발전 가능성</h3>
+                    <p>변화가 가져올 긍정적 측면과 새로운 발전 기회에 초점</p>
                 </div>
-                
-                <!-- Card 3-2 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="perspective" data-value="negative">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-exclamation-triangle card-icon text-orange-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">잠재적 위험과 해결 과제</h3>
-                        <p class="text-gray-600 text-sm">발생 가능한 문제점 및 윤리적 딜레마 분석</p>
-                    </div>
+                <div class="card" data-value="위험과 대응 방안">
+                    <h3>⚠️ 위험과 대응 방안</h3>
+                    <p>발생 가능한 문제점과 위기, 그리고 이에 대한 예방적 대응 전략</p>
                 </div>
-                
-                <!-- Card 3-3 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="perspective" data-value="personal">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-user card-icon text-blue-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">개인의 일상생활에 미치는 영향</h3>
-                        <p class="text-gray-600 text-sm">교육, 건강, 여가 등 개인의 삶 변화 예측</p>
-                    </div>
+                <div class="card" data-value="불평등과 형평성">
+                    <h3>⚖️ 불평등과 형평성</h3>
+                    <p>미래 변화가 사회적 형평성과 계층/지역 간 격차에 미치는 영향</p>
                 </div>
-                
-                <!-- Card 3-4 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="perspective" data-value="system">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-sitemap card-icon text-purple-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">사회 시스템 및 제도 변화</h3>
-                        <p class="text-gray-600 text-sm">법, 정치, 경제, 교육 시스템의 변화 방향 분석</p>
-                    </div>
+                <div class="card" data-value="세대 간 영향과 변화">
+                    <h3>👵👶 세대 간 영향과 변화</h3>
+                    <p>세대별 경험의 차이와 변화의 세대 간 영향력 비교 분석</p>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- 4. 요청 결과물 카드 -->
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">4. [요청 결과물] 카드</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 4-1 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="output" data-value="summary">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-list-ul card-icon text-teal-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">주요 예측과 전망 요약</h3>
-                        <p class="text-gray-600 text-sm">핵심 트렌드와 전문가 의견 정리</p>
-                    </div>
+        <div class="card-section">
+            <h2>📊 답변 형태</h2>
+            <div class="cards-container" id="response-format">
+                <div class="card" data-value="요약 보고서">
+                    <h3>📝 요약 보고서</h3>
+                    <p>핵심 주제와 발견 사항을 중심으로 한 구조화된 요약 형태</p>
                 </div>
-                
-                <!-- Card 4-2 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="output" data-value="scenario">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-film card-icon text-indigo-500"></i>
-                        <h3 class="text-lg font-semibold mb-2">심층 분석 및 구체적인 시나리오 제시</h3>
-                        <p class="text-gray-600 text-sm">다양한 가능성을 담은 미래 모습 상세 기술</p>
-                    </div>
+                <div class="card" data-value="인포그래픽 형태">
+                    <h3>📈 인포그래픽 형태</h3>
+                    <p>시각적 요소를 활용한 정보 전달, 주요 변화와 트렌드 시각화</p>
                 </div>
-                
-                <!-- Card 4-3 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="output" data-value="comparison">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-balance-scale card-icon text-blue-600"></i>
-                        <h3 class="text-lg font-semibold mb-2">긍정/부정 측면 비교 분석</h3>
-                        <p class="text-gray-600 text-sm">변화의 양면성과 주요 쟁점 제시</p>
-                    </div>
+                <div class="card" data-value="미래 시나리오 서술">
+                    <h3>🎬 미래 시나리오 서술</h3>
+                    <p>가능한 미래 상황을 서술형으로 묘사, 다양한 변수를 고려한 시나리오</p>
                 </div>
-                
-                <!-- Card 4-4 -->
-                <div class="card p-4 rounded-lg border border-gray-200 bg-white shadow-sm" data-category="output" data-value="strategy">
-                    <div class="flex flex-col items-center text-center h-full">
-                        <i class="fas fa-chess card-icon text-emerald-600"></i>
-                        <h3 class="text-lg font-semibold mb-2">미래 대비를 위한 전략 제안</h3>
-                        <p class="text-gray-600 text-sm">구체적인 준비 방안 및 정책 아이디어 제시</p>
-                    </div>
+                <div class="card" data-value="전문가 의견 분석">
+                    <h3>👩‍🔬 전문가 의견 분석</h3>
+                    <p>해당 분야 전문가들의 다양한 관점과 예측을 비교 분석한 형태</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Result Section -->
-        <section class="mt-12 p-6 bg-indigo-50 rounded-lg">
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">✍️ 생성된 프롬프트</h2>
-            <div id="prompt-result" class="p-4 bg-white rounded-lg border-2 border-indigo-300 min-h-[120px] text-lg">
-                <p class="text-gray-500 italic">각 카테고리에서 카드를 선택하면 여기에 맞춤형 프롬프트가 생성됩니다.</p>
-            </div>
-            
-            <div class="mt-4 flex justify-end">
-                <button id="copy-button" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 flex items-center">
-                    <i class="fas fa-copy mr-2"></i> 프롬프트 복사하기
-                </button>
-            </div>
-        </section>
-
-        <!-- Selected Cards Summary -->
-        <section class="mt-8 p-6 bg-gray-50 rounded-lg">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">🃏 선택한 카드</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div id="selected-time" class="p-3 bg-white rounded-lg border border-gray-200">
-                    <span class="font-medium text-indigo-700">[미래 시점]:</span>
-                    <span class="text-gray-600">선택되지 않음</span>
+        </div>
+        
+        <div class="card-section">
+            <h2>📚 근거 자료 종류</h2>
+            <div class="cards-container" id="evidence-type">
+                <div class="card" data-value="학술 논문과 연구 보고서">
+                    <h3>🎓 학술 논문과 연구 보고서</h3>
+                    <p>학계에서 검증된 연구 결과와 이론적 분석을 중심으로 한 자료</p>
                 </div>
-                <div id="selected-area" class="p-3 bg-white rounded-lg border border-gray-200">
-                    <span class="font-medium text-indigo-700">[핵심 변화 분야]:</span>
-                    <span class="text-gray-600">선택되지 않음</span>
+                <div class="card" data-value="최신 뉴스 기사와 미디어 콘텐츠">
+                    <h3>📰 최신 뉴스 기사와 미디어 콘텐츠</h3>
+                    <p>시사성 높은 최신 기사와 시장 동향, 트렌드 분석 자료</p>
                 </div>
-                <div id="selected-perspective" class="p-3 bg-white rounded-lg border border-gray-200">
-                    <span class="font-medium text-indigo-700">[탐구 관점]:</span>
-                    <span class="text-gray-600">선택되지 않음</span>
+                <div class="card" data-value="산업 보고서와 시장 예측 자료">
+                    <h3>📋 산업 보고서와 시장 예측 자료</h3>
+                    <p>산업계 전문 분석과 경제/시장 전망 자료, 비즈니스 인사이트</p>
                 </div>
-                <div id="selected-output" class="p-3 bg-white rounded-lg border border-gray-200">
-                    <span class="font-medium text-indigo-700">[요청 결과물]:</span>
-                    <span class="text-gray-600">선택되지 않음</span>
+                <div class="card" data-value="정부 정책 문서와 백서">
+                    <h3>🏛️ 정부 정책 문서와 백서</h3>
+                    <p>국내외 정부 및 공공기관의 공식 발표와 정책 계획, 전략 문서</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Example Section -->
-        <section class="mt-10 p-6 bg-gray-50 rounded-lg border border-gray-200">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">✨ 사용 예시</h2>
-            <div class="bg-white p-4 rounded-lg">
-                <p class="font-medium mb-2">예시 조합:</p>
-                <ul class="list-disc pl-5 mb-4 text-gray-700">
-                    <li><strong>[미래 시점]</strong>: 중기 미래 (2030년대)</li>
-                    <li><strong>[핵심 변화 분야]</strong>: 인공지능(AI) 발전과 확산</li>
-                    <li><strong>[탐구 관점]</strong>: 개인의 일상생활에 미치는 영향</li>
-                    <li><strong>[요청 결과물]</strong>: 심층 분석 및 구체적인 시나리오 제시</li>
-                </ul>
-                <div class="p-3 bg-gray-100 rounded-lg">
-                    <p class="text-gray-800 italic">
-                        "2030년대 인공지능(AI) 발전과 확산이 개인의 일상생활(교육, 건강, 여가 등)에 미치는 영향 측면에서 어떻게 변화할지 심층 분석하고 구체적인 시나리오를 몇 가지 제시해줘."
-                    </p>
-                </div>
+        </div>
+        
+        <div class="alert" id="selection-alert">⚠️ 모든 항목에서 카드를 선택해야 프롬프트를 생성할 수 있습니다.</div>
+        
+        <button class="generate-btn" id="generate-prompt">✨ 프롬프트 생성하기</button>
+        
+        <div class="prompt-section">
+            <h2>📄 생성된 프롬프트</h2>
+            <div class="prompt-container" id="generated-prompt">
+                카드를 선택한 후 프롬프트 생성 버튼을 클릭하세요.
             </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="mt-12 pt-6 border-t border-gray-200 text-center">
-            <p class="text-gray-600">© 2025 미래 사회 변화 딥서치 프롬프트 생성기</p>
-            <p class="text-gray-600 mt-2">제작: 세종장영실고등학교 김예원</p>
+        </div>
+        
+        <footer>
+            <p>© 2025 미래 사회 변화 탐구 프롬프트 생성기 | 교육용 도구</p>
+            <p class="creator-info">👩‍🏫 제작: 세종장영실고등학교 김예원 교사 (2025)</p>
         </footer>
-    </main>
-
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Data mappings
-            const futureTimeMap = {
-                'short-term': '단기 미래 (5~10년 후)',
-                'mid-term': '중기 미래 (2030년대)',
-                'long-term': '장기 미래 (2050년 이후)',
-                'after-event': '특정 기술/현상 발현 후'
-            };
+            const categories = [
+                'future-timeframe',
+                'core-area',
+                'research-perspective',
+                'response-format',
+                'evidence-type'
+            ];
             
-            const keyAreaMap = {
-                'ai': '인공지능(AI) 발전과 확산',
-                'climate': '기후변화와 지속가능성',
-                'work': '일과 직업의 미래',
-                'community': '인간관계와 공동체의 변화'
-            };
+            const selections = {};
             
-            const perspectiveMap = {
-                'positive': '긍정적 영향과 새로운 기회',
-                'negative': '잠재적 위험과 해결 과제',
-                'personal': '개인의 일상생활에 미치는 영향',
-                'system': '사회 시스템 및 제도 변화'
-            };
-            
-            const outputMap = {
-                'summary': '주요 예측과 전망 요약',
-                'scenario': '심층 분석 및 구체적인 시나리오 제시',
-                'comparison': '긍정/부정 측면 비교 분석',
-                'strategy': '미래 대비를 위한 전략 제안'
-            };
-            
-            // Details for prompt generation
-            const futureTimeDetail = {
-                'short-term': '5~10년 후',
-                'mid-term': '2030년대',
-                'long-term': '2050년 이후',
-                'after-event': '특정 기술/현상 발현 후'
-            };
-            
-            const perspectiveDetail = {
-                'positive': '긍정적 영향과 새로운 기회 측면에서',
-                'negative': '잠재적 위험과 해결 과제 측면에서',
-                'personal': '개인의 일상생활(교육, 건강, 여가 등)에 미치는 영향 측면에서',
-                'system': '사회 시스템 및 제도(법, 정치, 경제, 교육 등)의 변화 측면에서'
-            };
-            
-            const outputDetail = {
-                'summary': '주요 예측과 전망을 요약해줘',
-                'scenario': '심층 분석하고 구체적인 시나리오를 몇 가지 제시해줘',
-                'comparison': '긍정적 측면과 부정적 측면을 비교 분석해줘',
-                'strategy': '미래 대비를 위한 구체적인 전략을 제안해줘'
-            };
-            
-            // Variables for selected cards
-            let selectedTime = null;
-            let selectedArea = null;
-            let selectedPerspective = null;
-            let selectedOutput = null;
-            
-            // Select all cards
-            const cards = document.querySelectorAll('.card');
-            
-            // Add click event listeners to all cards
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const category = this.dataset.category;
-                    const value = this.dataset.value;
-                    
-                    // Remove selection from previous cards in the same category
-                    document.querySelectorAll(`[data-category="${category}"]`).forEach(c => {
-                        c.classList.remove('selected');
+            // 카드 선택 기능
+            categories.forEach(category => {
+                const cards = document.querySelectorAll(`#${category} .card`);
+                
+                cards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        // 같은 카테고리의 다른 카드 선택 해제
+                        cards.forEach(c => c.classList.remove('selected'));
+                        
+                        // 현재 카드 선택
+                        this.classList.add('selected');
+                        
+                        // 선택 정보 저장
+                        selections[category] = this.getAttribute('data-value');
                     });
-                    
-                    // Add selected class to the clicked card
-                    this.classList.add('selected');
-                    
-                    // Update selected values
-                    if (category === 'future-time') {
-                        selectedTime = value;
-                        document.getElementById('selected-time').innerHTML = 
-                            `<span class="font-medium text-indigo-700">[미래 시점]:</span> 
-                            <span class="text-gray-800">${futureTimeMap[value]}</span>`;
-                    } else if (category === 'key-area') {
-                        selectedArea = value;
-                        document.getElementById('selected-area').innerHTML = 
-                            `<span class="font-medium text-indigo-700">[핵심 변화 분야]:</span> 
-                            <span class="text-gray-800">${keyAreaMap[value]}</span>`;
-                    } else if (category === 'perspective') {
-                        selectedPerspective = value;
-                        document.getElementById('selected-perspective').innerHTML = 
-                            `<span class="font-medium text-indigo-700">[탐구 관점]:</span> 
-                            <span class="text-gray-800">${perspectiveMap[value]}</span>`;
-                    } else if (category === 'output') {
-                        selectedOutput = value;
-                        document.getElementById('selected-output').innerHTML = 
-                            `<span class="font-medium text-indigo-700">[요청 결과물]:</span> 
-                            <span class="text-gray-800">${outputMap[value]}</span>`;
-                    }
-                    
-                    // Generate prompt
-                    generatePrompt();
                 });
             });
             
-            // Function to generate prompt
-            function generatePrompt() {
-                const promptResult = document.getElementById('prompt-result');
-                
-                if (!selectedTime || !selectedArea || !selectedPerspective || !selectedOutput) {
-                    promptResult.innerHTML = '<p class="text-yellow-600">프롬프트를 완성하려면 각 카테고리에서 카드를 모두 선택해주세요.</p>';
-                    return;
-                }
-                
-                let prompt = `"${futureTimeDetail[selectedTime]} ${keyAreaMap[selectedArea]}이(가) ${perspectiveDetail[selectedPerspective]} 어떻게 변화할지 ${outputDetail[selectedOutput]}."`;
-                
-                promptResult.textContent = prompt;
-            }
+            // 프롬프트 생성 버튼
+            const generateBtn = document.getElementById('generate-prompt');
+            const promptContainer = document.getElementById('generated-prompt');
+            const selectionAlert = document.getElementById('selection-alert');
             
-            // Copy button functionality
-            const copyButton = document.getElementById('copy-button');
-            copyButton.addEventListener('click', function() {
-                const promptResult = document.getElementById('prompt-result');
+            generateBtn.addEventListener('click', function() {
+                // 모든 카테고리가 선택되었는지 확인
+                const allSelected = categories.every(category => selections[category]);
                 
-                if (promptResult.textContent.trim() === "" || 
-                    promptResult.textContent.includes("카드를 선택하면") || 
-                    promptResult.textContent.includes("카드를 모두 선택해주세요")) {
+                if (!allSelected) {
+                    selectionAlert.style.display = 'block';
                     return;
                 }
                 
-                // Use the clipboard API if available
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(promptResult.textContent)
-                        .then(() => {
-                            showCopySuccess();
-                        })
-                        .catch(err => {
-                            fallbackCopy();
-                        });
-                } else {
-                    fallbackCopy();
-                }
+                selectionAlert.style.display = 'none';
                 
-                function fallbackCopy() {
-                    // Create a temporary textarea to copy the text
-                    const textarea = document.createElement('textarea');
-                    textarea.value = promptResult.textContent;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    showCopySuccess();
-                }
+                // 프롬프트 생성
+                const prompt = generatePrompt(selections);
                 
-                function showCopySuccess() {
-                    // Change button text temporarily
-                    const originalText = copyButton.innerHTML;
-                    copyButton.innerHTML = '<i class="fas fa-check mr-2"></i> 복사 완료!';
-                    copyButton.classList.remove('bg-indigo-600');
-                    copyButton.classList.remove('hover:bg-indigo-700');
-                    copyButton.classList.add('bg-green-600');
-                    copyButton.classList.add('hover:bg-green-700');
-                    
-                    setTimeout(() => {
-                        copyButton.innerHTML = originalText;
-                        copyButton.classList.remove('bg-green-600');
-                        copyButton.classList.remove('hover:bg-green-700');
-                        copyButton.classList.add('bg-indigo-600');
-                        copyButton.classList.add('hover:bg-indigo-700');
-                    }, 2000);
-                }
+                // 프롬프트 표시
+                promptContainer.innerHTML = prompt;
+                
+                // 복사 버튼 추가
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = '📋 복사';
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(prompt).then(() => {
+                        copyBtn.textContent = '✅ 복사됨!';
+                        setTimeout(() => {
+                            copyBtn.textContent = '📋 복사';
+                        }, 2000);
+                    });
+                });
+                
+                promptContainer.appendChild(copyBtn);
             });
+            
+            // 프롬프트 생성 함수
+            function generatePrompt(selections) {
+                const timeframe = selections['future-timeframe'];
+                const area = selections['core-area'];
+                const perspective = selections['research-perspective'];
+                const format = selections['response-format'];
+                const evidence = selections['evidence-type'];
+                
+                return `# 딥서치: ${timeframe}의 ${area} 연구
+
+## 연구 요청
+
+딥서치 기능을 켜고, ${timeframe}에 예상되는 ${area}의 주요 변화와 트렌드에 대해 최대한 많은 정보, 관점, 이론, 사례를 학습해 주세요. 특히 ${perspective}에 중점을 두고 분석해 주세요.
+
+## 요구 사항
+
+1. ${evidence}를 우선적으로 참고하여 분석해 주세요.
+2. 다양한 견해와 예측을 균형있게 다루어 주세요.
+3. 핵심 트렌드와 변화 요인들을 명확히 구분하여 설명해 주세요.
+4. 해당 변화가 개인, 조직, 사회에 미치는 영향을 다각도로 분석해 주세요.
+
+## 출력 형식
+
+${format} 형태로 결과를 정리해 주시고, 다음 요소를 포함해 주세요:
+- 주요 변화 동인과 핵심 트렌드
+- 가능성 높은 시나리오와 그 근거
+- 주목해야 할 잠재적 도전과제
+- 개인과 사회의 준비 방향 제안
+
+분석의 근거가 되는 주요 출처를 함께 제시해 주세요.`;
+            }
         });
     </script>
 </body>
